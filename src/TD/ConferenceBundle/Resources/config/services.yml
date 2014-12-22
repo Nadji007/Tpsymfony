@@ -1,0 +1,4 @@
+services:
+#    conference.example:
+#        class: TD\ConferenceBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,15 @@
+conference_homepage:
+    path:     /
+    defaults: { _controller: ConferenceBundle:Conf:index }
+td_conference:
+    path:     /conference/{id}
+    defaults: { _controller: ConferenceBundle:Conf:conf }
+a_propos:
+    path:     /about
+    defaults: { _controller: ConferenceBundle:About:article }
+posts:
+    path:     /ajout
+    defaults: { _controller: ConferenceBundle:Posts:ajout }
+tags:
+    path:     /tags
+    defaults: { _controller: ConferenceBundle:Tags:ajout }

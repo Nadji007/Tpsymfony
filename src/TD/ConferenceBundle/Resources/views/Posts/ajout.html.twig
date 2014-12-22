@@ -1,0 +1,160 @@
+
+{% extends "::base.html.twig"%}
+      
+{% block body %}
+<header id="banner" role="banner">
+        <div id="avatar"></div>
+        <h1 id="afup"><a class="link-home" href="#">ConfPHP</a>
+        </h1>
+        <p id="conf" >Prochaines conférences 2014</p>
+        <nav role="navigation" id="navigation">
+            <a href="{{ path('conference_homepage') }}">Accueil</a>
+             <a href="{{ path('conference_homepage') }}">A propos</a>
+        </nav>
+    </header>
+    <div id="main" role="main">
+     <section id="post" >
+            <h1>Conférences intéressantes autour du PHP</h1>
+           <div class="well">
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+      {# Génération du label. #}
+      {{ form_label(form.titre, "Titre ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+      {# Affichage des erreurs pour ce champ précis. #}
+      {{ form_errors(form.titre) }}
+
+      <div class="col-sm-4">
+        {# Génération de l'input. #}
+        {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+
+    {# Idem pour un autre champ. #}
+    <div class="form-group">
+      {{ form_label(form.extrait, "Extrait", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.extrait) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.extrait, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ form_label(form.contenu, "Contenu", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.contenu) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ form_label(form.tags, "Tags", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.tags) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.tags, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+    <div class="form-group">
+    {{ form_label(form.image, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.image) }}
+      
+     <div class="col-sm-4">
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+      </div> 
+    </div>
+
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget 
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}#}
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+  
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+
+         </div>
+
+    </section>
+         
+{# On charge la bibliothèque jQuery. Ici, je la prends depuis le CDN google
+   mais si vous l'avez en local, changez simplement l'adresse. #}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{# Voici le script en question : #}
+<script type="text/javascript">
+  $(document).ready(function() {
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $container = $('div#td_conferencebundle_posts_tags');
+
+    // On ajoute un lien pour ajouter une nouvelle catégorie
+    var $addLink = $('<a href="#" id="add_category" class="btn btn-default">Ajouter un tag</a>');
+    $container.append($addLink);
+
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $addLink.click(function(e) {
+      addCategory($container);
+      e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+      return false;
+    });
+
+    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+    var index = $container.find(':input').length;
+
+    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+    if (index == 0) {
+      addCategory($container);
+    } else {
+      // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+      $container.children('div').each(function() {
+        addDeleteLink($(this));
+      });
+    }
+
+    // La fonction qui ajoute un formulaire Categorie
+    function addCategory($container) {
+      // Dans le contenu de l'attribut « data-prototype », on remplace :
+      // - le texte "__name__label__" qu'il contient par le label du champ
+      // - le texte "__name__" qu'il contient par le numéro du champ
+      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Tags n°' + (index+1))
+          .replace(/__name__/g, index));
+
+      // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+      addDeleteLink($prototype);
+
+      // On ajoute le prototype modifié à la fin de la balise <div>
+      $container.append($prototype);
+
+      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+      index++;
+    }
+
+    // La fonction qui ajoute un lien de suppression d'une catégorie
+    function addDeleteLink($prototype) {
+      // Création du lien
+      $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+      // Ajout du lien
+      $prototype.append($deleteLink);
+
+      // Ajout du listener sur le clic du lien
+      $deleteLink.click(function(e) {
+        $prototype.remove();
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        return false;
+      });
+    }
+  });
+</script>
+<section id="sidebar">
+        <h1>sponsors</h1>
+        <img class="logo" src="{{ asset('img/elao_logo_150px.png')}}" />
+        <img class="logo" src="{{ asset('img/zol-logo.png')}}" />
+        <img class="logo" src="{{ asset('img/logo-large.png')}}" />
+        <img class="logo" src="{{ asset('img/Elephpant.png')}}" />
+</section>
+</div>
+{%endblock %}

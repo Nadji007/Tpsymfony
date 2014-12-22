@@ -1,0 +1,8 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+conference:
+    resource: "@ConferenceBundle/Resources/config/routing.yml"
+    prefix:   /
+

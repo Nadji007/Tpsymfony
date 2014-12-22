@@ -1,0 +1,45 @@
+{% extends "::base.html.twig"%}
+      
+{% block body %}
+
+    <div id="main" role="main">
+        <section id="post" >
+            <h1>Conférences autour du PHP</h1>
+            <article class="news">
+               
+              <h2>{{ conference.titre }}</h2> 
+ 
+                <img class="left"
+                     src="{{ asset( conference.image.url ) }}" alt="" width="200" height="111" />  
+                <p class="abstract">
+                    
+                    {{ conference.extrait }}
+                    <br>
+                </p>
+                <p><a class="link-outside" href="http://berlin2014.live.symfony.com/" >site web de la conférence</a>
+                </p>
+                
+                <p> {{ conference.contenu }}
+                </p>
+                <p class="link-keyword" >Mots clefs: 
+                   
+                    <a  href="">{{ conference.tags.name }}</a>
+                 </p>
+
+            <footer>
+                <h3 class="date">début:29-10-2014 09:00:00 fin: 31-10-2014 18:00:00 </h3>
+              
+            </footer>
+   
+        </article>
+         
+</section>
+<section id="sidebar">
+        <h1>sponsors</h1>
+        <img class="logo" src="{{ asset('img/elao_logo_150px.png')}}" />
+        <img class="logo" src="{{ asset('img/zol-logo.png')}}" />
+        <img class="logo" src="{{ asset('img/logo-large.png')}}" />
+        <img class="logo" src="{{ asset('img/Elephpant.png')}}" />
+</section>
+</div>
+{%endblock %}

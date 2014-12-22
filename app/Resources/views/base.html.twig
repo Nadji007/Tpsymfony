@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}ConfPHP!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset ('css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset ('css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset ('css/bootstrap-theme.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset ('css/dashboard.css') }}" />
+    </head>
+    <body>
+        
+        <header id="banner" role="banner">
+        <div id="avatar"></div>
+        <h1 id="afup"><a class="link-home" href="#">ConfPHP</a>
+        </h1>
+        <p id="conf" >Prochaines conférences 2014</p>
+        <nav role="navigation" id="navigation">
+            <a href="{{ path('conference_homepage') }}">Accueil</a>
+            {# <a href="{{ path('conference_homepage') }}">A propos</a> #}
+              <a href="{{ path('fos_user_security_login') }}">Login</a>
+        </nav>
+    </header>
+
+{% block body %}{% endblock %}
+
+<footer id="footer">
+    <p>Mentions légales</p>
+</footer> 
+  {% block javascripts %}
+    
+  {#  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> }#}
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  {% endblock %}    
+    </body>
+</html>

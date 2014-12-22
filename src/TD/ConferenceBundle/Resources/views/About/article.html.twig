@@ -1,0 +1,51 @@
+{% extends "::base.html.twig"%}
+      
+{% block body %}
+<header id="banner" role="banner">
+        <div id="avatar"></div>
+        <h1 id="afup"><a class="link-home" href="#">ConfPHP</a>
+        </h1>
+        <p id="conf" >Prochaines conférences 2014</p>
+        <nav role="navigation" id="navigation">
+            <a  href="#">Accueil</a>
+            <a  href="#">à propos</a>
+        </nav>
+    </header>
+    <div id="main" role="main">
+        <section id="post" >
+            <h1>Conférences intéressantes autour du PHP</h1>
+            <article class="news">
+            <h2><a href="#" class="link-post" >Symfony Live Madrid 2014</a></h2>
+                <img class="left" src="symfony_madrid.png" >
+                <p class="abstract">
+                    SensioLabs Madrid is proud to announce the third edition of the exceptionally successful SymfonyLive Madrid.
+                    On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions,
+                    et empêche de se concentrer sur la mise en page elle-même. 
+                    L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte.
+                    Du texte. Du texte.' est qu'il possède une distribution de lettres plus ou moins normale, 
+                    et en tout cas comparable avec celle du français standard. De nombreuses suites logicielles de mise en page 
+                    ou éditeurs de sites Web ont fait du Lorem Ipsum leur faux texte par défaut.
+                    <br>
+                    <a class="link" href="#">lire la suite...</a>
+                    <br>
+                </p>
+                <p><a class="link-outside" href="http://berlin2014.live.symfony.com/" >site web de la conférence</a>
+                </p>
+                <p class="link-keyword" >Mots clefs: 
+                    <a  href="#">sécurité</a>
+                </p>
+               
+            <footer>
+                <h3 class="date">début:29-10-2014 09:00:00 fin: 31-10-2014 18:00:00 </h3>
+            </footer>
+        </article>
+</section>
+<section id="sidebar">
+        <h1>sponsors</h1>
+        <img class="logo" src="asset/images/logos/elao_logo_150px.png" >
+        <img class="logo" src="asset/images/logos/zol-logo.png" >
+        <img class="logo" src="asset/images/logos/logo-large.png" >
+        <img class="logo" src="asset/images/logos/Elephpant.png" >
+</section>
+</div>
+{%endblock %}
